@@ -1,12 +1,4 @@
 /* ============================================
-   GSAP OVERRIDE — prevent CSS conflicts
-   ============================================ */
-.fade-in {
-  opacity: 1 !important;
-  transform: none !important;
-}
-
-/* ============================================
    CSS VARIABLES
    ============================================ */
 :root {
@@ -95,50 +87,12 @@ section {
   animation: orbFloat 14s ease-in-out infinite;
 }
 
-#about .section-orb {
-  top: -100px;
-  right: -100px;
-}
-
-#skills .section-orb {
-  bottom: -100px;
-  left: -100px;
-  background: radial-gradient(circle, rgba(172,186,196,0.13) 0%, transparent 70%);
-  animation-duration: 18s;
-  animation-direction: reverse;
-}
-
-#experience .section-orb {
-  top: 20%;
-  right: -150px;
-  width: 600px;
-  height: 600px;
-  animation-duration: 16s;
-}
-
-#projects .section-orb {
-  top: -80px;
-  left: -100px;
-  background: radial-gradient(circle, rgba(201,168,76,0.13) 0%, transparent 70%);
-  animation-direction: reverse;
-  animation-duration: 12s;
-}
-
-#certifications .section-orb {
-  bottom: -100px;
-  right: -100px;
-  background: radial-gradient(circle, rgba(172,186,196,0.12) 0%, transparent 70%);
-  animation-duration: 20s;
-}
-
-#contact .section-orb {
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 600px;
-  height: 600px;
-  animation-duration: 15s;
-}
+#about .section-orb        { top: -100px; right: -100px; }
+#skills .section-orb       { bottom: -100px; left: -100px; background: radial-gradient(circle, rgba(172,186,196,0.13) 0%, transparent 70%); animation-duration: 18s; animation-direction: reverse; }
+#experience .section-orb   { top: 20%; right: -150px; width: 600px; height: 600px; animation-duration: 16s; }
+#projects .section-orb     { top: -80px; left: -100px; background: radial-gradient(circle, rgba(201,168,76,0.13) 0%, transparent 70%); animation-direction: reverse; animation-duration: 12s; }
+#certifications .section-orb { bottom: -100px; right: -100px; background: radial-gradient(circle, rgba(172,186,196,0.12) 0%, transparent 70%); animation-duration: 20s; }
+#contact .section-orb      { top: 50%; left: 50%; transform: translate(-50%, -50%); width: 600px; height: 600px; animation-duration: 15s; }
 
 /* ============================================
    GLOBAL ORBS
@@ -152,29 +106,23 @@ section {
 }
 
 .orb-1 {
-  width: 600px;
-  height: 600px;
+  width: 600px; height: 600px;
   background: rgba(201,168,76,0.1);
-  top: -150px;
-  right: -150px;
+  top: -150px; right: -150px;
   animation: orbFloat 12s ease-in-out infinite;
 }
 
 .orb-2 {
-  width: 500px;
-  height: 500px;
+  width: 500px; height: 500px;
   background: rgba(172,186,196,0.07);
-  bottom: 20%;
-  left: -150px;
+  bottom: 20%; left: -150px;
   animation: orbFloat 16s ease-in-out infinite reverse;
 }
 
 .orb-3 {
-  width: 400px;
-  height: 400px;
+  width: 400px; height: 400px;
   background: rgba(201,168,76,0.08);
-  top: 50%;
-  right: 10%;
+  top: 50%; right: 10%;
   animation: orbFloat 20s ease-in-out infinite;
 }
 
@@ -844,7 +792,7 @@ nav.scrolled {
 
 .certs-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  grid-template-columns: repeat(3, 1fr);
   gap: 1rem;
 }
 
@@ -943,19 +891,6 @@ nav.scrolled {
   flex-shrink: 0;
 }
 
-.github-soon {
-  cursor: default;
-  border-style: dashed;
-  opacity: 0.5;
-}
-
-.github-soon:hover {
-  transform: none;
-  color: var(--muted);
-  border-color: var(--border);
-  box-shadow: none;
-}
-
 /* ============================================
    FOOTER
    ============================================ */
@@ -984,6 +919,8 @@ footer {
 /* ============================================
    ANIMATIONS
    ============================================ */
+.fade-in { opacity: 1; transform: none; }
+
 .animate-up {
   opacity: 0;
   transform: translateY(40px);
@@ -1000,15 +937,96 @@ footer {
   to { opacity: 1; transform: translateY(0); }
 }
 
-.fade-in {
+/* ============================================
+   SECTION TRANSITIONS
+   ============================================ */
+#transition-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  background: var(--bg);
   opacity: 0;
-  transform: translateY(24px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
 }
 
-.fade-in.visible {
+#transition-overlay.t-in {
+  pointer-events: all;
+  animation: tIn 0.45s cubic-bezier(0.77,0,0.175,1) forwards;
+}
+
+#transition-overlay.t-out {
+  animation: tOut 0.45s cubic-bezier(0.77,0,0.175,1) forwards;
+}
+
+#transition-overlay.t-curtain-in {
+  pointer-events: all;
   opacity: 1;
-  transform: translateY(0);
+  animation: curtainIn 0.45s cubic-bezier(0.77,0,0.175,1) forwards;
+}
+
+#transition-overlay.t-curtain-out {
+  opacity: 1;
+  animation: curtainOut 0.45s cubic-bezier(0.77,0,0.175,1) forwards;
+}
+
+#transition-overlay.t-slideup-in {
+  pointer-events: all;
+  opacity: 1;
+  animation: slideUpIn 0.45s cubic-bezier(0.77,0,0.175,1) forwards;
+}
+
+#transition-overlay.t-slideup-out {
+  opacity: 1;
+  animation: slideUpOut 0.45s cubic-bezier(0.77,0,0.175,1) forwards;
+}
+
+#transition-overlay.t-zoom-in {
+  pointer-events: all;
+  animation: zoomIn 0.45s ease forwards;
+}
+
+#transition-overlay.t-zoom-out {
+  animation: zoomOut 0.45s ease forwards;
+}
+
+@keyframes tIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes tOut {
+  from { opacity: 1; }
+  to   { opacity: 0; }
+}
+
+@keyframes curtainIn {
+  from { clip-path: inset(0 100% 0 0); }
+  to   { clip-path: inset(0 0% 0 0); }
+}
+
+@keyframes curtainOut {
+  from { clip-path: inset(0 0% 0 0); }
+  to   { clip-path: inset(0 0 0 100%); }
+}
+
+@keyframes slideUpIn {
+  from { clip-path: inset(100% 0 0 0); }
+  to   { clip-path: inset(0% 0 0 0); }
+}
+
+@keyframes slideUpOut {
+  from { clip-path: inset(0% 0 0 0); }
+  to   { clip-path: inset(0 0 100% 0); }
+}
+
+@keyframes zoomIn {
+  from { opacity: 0; transform: scale(1.08); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+@keyframes zoomOut {
+  from { opacity: 1; transform: scale(1); }
+  to   { opacity: 0; transform: scale(0.95); }
 }
 
 /* ============================================
@@ -1020,6 +1038,5 @@ footer {
   .hero-cta { flex-direction: column; align-items: flex-start; }
   .about-grid { grid-template-columns: 1fr; gap: 3rem; }
   .footer-inner { flex-direction: column; text-align: center; }
-
-  
+  .certs-grid { grid-template-columns: 1fr; }
 }
